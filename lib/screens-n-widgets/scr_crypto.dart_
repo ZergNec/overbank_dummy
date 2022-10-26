@@ -1,0 +1,357 @@
+// import 'package:flutter/material.dart';
+// import 'wg_bottom_bar.dart';
+// import 'package:intl/intl.dart';
+// import 'wg_cards_4buttons.dart';
+// import '/constants.dart';
+// import 'wg_app_bar.dart';
+// import '/scr_start_graph_stacktool.dart';
+
+// class scr_cryptoPage extends StatefulWidget {
+//   @override
+//   State<scr_cryptoPage> createState() => _scr_cryptoPage_State();
+// }
+
+// class _scr_cryptoPage_State extends State<scr_cryptoPage> {
+//   Widget activeCrypto(Crypto cryptoAsset, double heightRatio, bool active) {
+//     //print(cryptoAsset.path);
+//     String delta = '';
+//     TextStyle txtStyle20 = TextStyle(
+//         fontFamily: 'Inter',
+//         fontWeight: FontWeight.w400,
+//         color: majorColor,
+//         fontSize: 20 * heightRatio);
+//     TextStyle txtStyle15 = TextStyle(
+//         fontFamily: 'Inter',
+//         fontWeight: FontWeight.w400,
+//         color: btnBgColor,
+//         fontSize: 15 * heightRatio);
+//     TextStyle txtStyleGreen = TextStyle(
+//         fontFamily: 'Inter',
+//         fontWeight: FontWeight.w400,
+//         color: increaseColor,
+//         fontSize: 20 * heightRatio);
+//     TextStyle txtStyleRed = TextStyle(
+//         fontFamily: 'Inter',
+//         fontWeight: FontWeight.w400,
+//         color: negativeAmount,
+//         fontSize: 20 * heightRatio);
+
+
+//     Widget btns =
+//         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+//       wg_button(context, heightRatio, 'assets/button_faces/Buy icon.png', 'png',
+//           'Buy', 0),
+//       wg_button(context, heightRatio, 'assets/button_faces/Withdraw icon.png',
+//           'png', 'Sell', 0),
+//       wg_button(context, heightRatio, 'assets/button_faces/Pay icon.png', 'png',
+//           'Pay', 0),
+//       wg_button(context, heightRatio, 'assets/button_faces/Swap icon.png',
+//           'png', 'Swap', 0),
+//     ]);
+
+//     return Column(
+//       children: [
+//         Row(
+//           children: [
+//             Container(
+//                 height: 40 * heightRatio,
+//                 width: 40 * heightRatio,
+//                 child: Image.asset(cryptoAsset.path)),
+//             SizedBox(width: 10 * heightRatio),
+//             Expanded(
+//               //flex: 1,
+//               child: Column(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   Row(
+//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                     children: [
+//                       Text(cryptoAsset.code, style: txtStyle20),
+//                       Row(
+//                         children: [
+//                           Text(cryptoAsset.placement, style: txtStyle20),
+//                           SizedBox(width: 10 * heightRatio),
+//                           active
+//                               ? Image.asset('assets/button_faces/Edit.png',
+//                                   height: 20 * heightRatio)
+//                               : SizedBox(),
+//                         ],
+//                       ),
+//                       //Text(NumberFormat.currency(locale: "eu", symbol: '') //'€')
+//                       //        .format(cryptoAsset.amount),
+
+//                       Text(
+//                           '€${NumberFormat.currency(locale: "eu", symbol: '').format(cryptoAsset.amount)}',
+//                           style: txtStyle20)
+//                     ],
+//                   ),
+//                   SizedBox(height: 5 * heightRatio),
+//                   Row(
+//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                     children: [
+//                       Text(cryptoAsset.title, style: txtStyle15),
+//                       Text('${cryptoAsset.period} $delta%',
+//                           style: (cryptoAsset.delta < 0)
+//                               ? txtStyleRed
+//                               : txtStyleGreen),
+//                     ],
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ],
+//         ),
+//         SizedBox(height: 10 * heightRatio),
+//         active ? btns : SizedBox(width: 10 * heightRatio),
+//       ],
+//     );
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final double deviceWidth = MediaQuery.of(context).size.width;
+//     final double deviceHeight = MediaQuery.of(context).size.height;
+
+//     final double heightRatio = deviceHeight / 926;
+//     final double widthRatio = deviceWidth / 428;
+//     final TextStyle plateText = TextStyle(
+//         fontFamily: 'Inter-regular',
+//         color: majorColor,
+//         fontSize: 20 * heightRatio,
+//         fontWeight: FontWeight.w400);
+
+//     final TextStyle dropdownText = TextStyle(
+//         fontFamily: 'Inter-regular',
+//         color: containerColor,
+//         fontSize: 14 * heightRatio,
+//         fontWeight: FontWeight.w400);
+
+//     return WillPopScope(
+//       onWillPop: () async {
+//         return false;
+//       },
+//       child: Scaffold(
+//         backgroundColor: bgColor,
+//         appBar: globalAppBar(context, 6, heightRatio, 1),
+//         body: SafeArea(
+//           child: Column(
+//             crossAxisAlignment: CrossAxisAlignment.center,
+//             children: [
+//               Text('Your crypto wallet value',
+//                   style: TextStyle(
+//                       fontFamily: 'Inter-regular',
+//                       color: majorColor,
+//                       fontSize: 14 * heightRatio,
+//                       fontWeight: FontWeight.w400)),
+//               Text('€25.901,02',
+//                   style: TextStyle(
+//                       fontFamily: 'Inter-regular',
+//                       color: majorColor,
+//                       fontSize: 40 * heightRatio,
+//                       fontWeight: FontWeight.w400)),
+//               ToggleButtons3(),
+//               SizedBox(height: 10 * heightRatio),
+//               Row(
+//                 children: [
+//                   SizedBox(width: 35 * widthRatio),
+//                   Text('Wallet', style: plateText),
+//                   SizedBox(width: 10 * widthRatio),
+
+//                   Image.asset(
+//                     'assets/button_faces/Add new icon.png',
+//                     height: 20 * heightRatio,
+//                   ),
+
+
+//                 ],
+//               ),
+//               Expanded(
+//                 child: ListView(
+//                   children: [
+          
+
+//                     Padding(
+//                         padding: EdgeInsets.only(
+//                             left: 20 * widthRatio,
+//                             right: 20 * widthRatio,
+//                             top: 12 * heightRatio),
+//                         child: ElevatedButton(
+//                           style: ElevatedButton.styleFrom(
+                        
+//                             primary: containerColor,
+//                             elevation: 5,
+//                             shape: const RoundedRectangleBorder(
+//                               borderRadius:
+//                                   BorderRadius.all(Radius.circular(8)),
+//                             ),
+//                           ),
+//                           onPressed: () {},
+//                           child: Column(
+//                             children: [
+//                               SizedBox(height: 10 * heightRatio),
+//                               activeCrypto(CryptoAssets[0], heightRatio, true),
+//                               SizedBox(height: 10 * heightRatio),
+//                             ],
+//                           ),
+//                         )),
+
+//                     Padding(
+//                         padding: EdgeInsets.only(
+//                             left: 20 * widthRatio,
+//                             right: 20 * widthRatio,
+//                             top: 12 * heightRatio),
+//                         child: ElevatedButton(
+//                           style: ElevatedButton.styleFrom(
+                          
+//                             primary: containerColor,
+//                             elevation: 5,
+//                             shape: const RoundedRectangleBorder(
+//                               borderRadius:
+//                                   BorderRadius.all(Radius.circular(8)),
+//                             ),
+//                           ),
+//                           onPressed: () {},
+//                           child: Column(
+//                             children: [
+//                               SizedBox(height: 10 * heightRatio),
+//                               activeCrypto(CryptoAssets[1], heightRatio, false),
+//                               SizedBox(height: 10 * heightRatio),
+//                             ],
+//                           ),
+//                         )),
+
+//                     Padding(
+//                         padding: EdgeInsets.only(
+//                             left: 20 * widthRatio,
+//                             right: 20 * widthRatio,
+//                             top: 12 * heightRatio),
+//                         child: ElevatedButton(
+//                           style: ElevatedButton.styleFrom(
+                        
+//                             primary: containerColor,
+//                             elevation: 5,
+//                             shape: const RoundedRectangleBorder(
+//                               borderRadius:
+//                                   BorderRadius.all(Radius.circular(8)),
+//                             ),
+//                           ),
+//                           onPressed: () {},
+//                           child: Column(
+//                             children: [
+//                               SizedBox(height: 10 * heightRatio),
+//                               activeCrypto(CryptoAssets[2], heightRatio, false),
+//                               SizedBox(height: 10 * heightRatio),
+//                             ],
+//                           ),
+//                         )),
+
+//                     Padding(
+//                         padding: EdgeInsets.only(
+//                             left: 20 * widthRatio,
+//                             right: 20 * widthRatio,
+//                             top: 12 * heightRatio),
+//                         child: ElevatedButton(
+//                           style: ElevatedButton.styleFrom(
+                     
+//                             primary: containerColor,
+//                             elevation: 5,
+//                             shape: const RoundedRectangleBorder(
+//                               borderRadius:
+//                                   BorderRadius.all(Radius.circular(8)),
+//                             ),
+//                           ),
+//                           onPressed: () {},
+//                           child: Column(
+//                             children: [
+//                               SizedBox(height: 10 * heightRatio),
+//                               activeCrypto(CryptoAssets[3], heightRatio, false),
+//                               SizedBox(height: 10 * heightRatio),
+//                             ],
+//                           ),
+//                         )),
+
+//                     Padding(
+//                         padding: EdgeInsets.only(
+//                             left: 20 * widthRatio,
+//                             right: 20 * widthRatio,
+//                             top: 12 * heightRatio),
+//                         child: ElevatedButton(
+//                           style: ElevatedButton.styleFrom(
+//                             //minimumSize: Size.fromHeight(100),
+//                             primary: containerColor,
+//                             elevation: 5,
+//                             shape: const RoundedRectangleBorder(
+//                               borderRadius:
+//                                   BorderRadius.all(Radius.circular(8)),
+//                             ),
+//                           ),
+//                           onPressed: () {},
+//                           child: Column(
+//                             children: [
+//                               SizedBox(height: 10 * heightRatio),
+//                               activeCrypto(CryptoAssets[4], heightRatio, false),
+//                               SizedBox(height: 10 * heightRatio),
+//                             ],
+//                           ),
+//                         )),
+
+//                     Padding(
+//                         padding: EdgeInsets.only(
+//                             left: 20 * widthRatio,
+//                             right: 20 * widthRatio,
+//                             top: 12 * heightRatio),
+//                         child: ElevatedButton(
+//                           style: ElevatedButton.styleFrom(
+//                             //minimumSize: Size.fromHeight(100),
+//                             primary: containerColor,
+//                             elevation: 5,
+//                             shape: const RoundedRectangleBorder(
+//                               borderRadius:
+//                                   BorderRadius.all(Radius.circular(8)),
+//                             ),
+//                           ),
+//                           onPressed: () {},
+//                           child: Column(
+//                             children: [
+//                               SizedBox(height: 10 * heightRatio),
+//                               activeCrypto(CryptoAssets[5], heightRatio, false),
+//                               SizedBox(height: 10 * heightRatio),
+//                             ],
+//                           ),
+//                         )),
+
+//                     Padding(
+//                         padding: EdgeInsets.only(
+//                             left: 20 * widthRatio,
+//                             right: 20 * widthRatio,
+//                             top: 12 * heightRatio),
+//                         child: ElevatedButton(
+//                           style: ElevatedButton.styleFrom(
+//                             //minimumSize: Size.fromHeight(100),
+//                             primary: containerColor,
+//                             elevation: 5,
+//                             shape: const RoundedRectangleBorder(
+//                               borderRadius:
+//                                   BorderRadius.all(Radius.circular(8)),
+//                             ),
+//                           ),
+//                           onPressed: () {},
+//                           child: Column(
+//                             children: [
+//                               SizedBox(height: 10 * heightRatio),
+//                               activeCrypto(CryptoAssets[0], heightRatio, false),
+//                               SizedBox(height: 10 * heightRatio),
+//                             ],
+//                           ),
+//                         )),
+//                   ],
+//                 ),
+//               ),
+//               wg_bottom_bar(context, heightRatio),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

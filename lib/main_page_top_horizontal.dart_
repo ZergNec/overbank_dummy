@@ -1,0 +1,23 @@
+import 'package:flutter/material.dart';
+
+class AssetGroups extends StatelessWidget {
+  final String assetGroup;
+
+  AssetGroups({required this.assetGroup});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Container(
+        height: 50,
+        width: 100,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20.0),
+          color: Colors.blue.shade300,
+        ),
+        child: Center(child: Text(assetGroup)),
+      ),
+    );
+  }
+}

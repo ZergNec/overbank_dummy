@@ -1,0 +1,71 @@
+import 'package:flutter/material.dart';
+import 'wg_bottom_bar.dart';
+import 'package:intl/intl.dart';
+import 'wg_cards_4buttons.dart';
+import '/constants.dart';
+import 'wg_app_bar.dart';
+
+class scr_tokensPage extends StatefulWidget {
+  @override
+  State<scr_tokensPage> createState() => _scr_tokensPage_State();
+}
+
+class _scr_tokensPage_State extends State<scr_tokensPage> {
+  @override
+  Widget build(BuildContext context) {
+    final double deviceWidth = MediaQuery.of(context).size.width;
+    final double deviceHeight = MediaQuery.of(context).size.height;
+
+    final double heightRatio = deviceHeight / 926;
+    final double widthRatio = deviceWidth / 428;
+    final TextStyle plateText = TextStyle(
+        fontFamily: 'Inter-regular',
+        color: majorColor,
+        fontSize: 20 * heightRatio,
+        fontWeight: FontWeight.w400);
+
+    final TextStyle dropdownText = TextStyle(
+        fontFamily: 'Inter-regular',
+        color: containerColor,
+        fontSize: 14 * heightRatio,
+        fontWeight: FontWeight.w400);
+
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        backgroundColor: bgColor,
+        appBar: globalAppBar(context, 6, heightRatio, 4),
+        // persistentFooterButtons: [Text('btn1'), Text('btn2'), Text('btn3')],
+        /*
+        bottomNavigationBar: Container(
+          color: Colors.amber,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [Text('Btn1'), Text('Btn2'), Text('Btn3')],
+            //constraints: BoxConstraints.expand(),
+            //height: ,
+            // child: wg_bottom_bar(context, heightRatio),
+
+            //SizedBox(height: 10 * heightRatio)
+          ),
+        ),
+   */
+        body: SafeArea(
+          child: Center(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                'Under Construction. Tip for myself: use pageview in bottombar',
+                style: TextStyle(color: Colors.deepOrange, fontSize: 40),
+              ),
+              wg_bottom_bar(context, heightRatio)
+            ],
+          )),
+        ),
+      ),
+    );
+  }
+}

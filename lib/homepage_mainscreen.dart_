@@ -1,0 +1,111 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'constants.dart';
+import 'all_accounts_carousel.dart';
+import 'assets_list.dart';
+import 'main_page_top_horizontal.dart';
+import 'dart:convert';
+import 'api _connection/api_requests.dart';
+import 'customer_assets_class.dart';
+
+class home_screen extends StatefulWidget {
+  @override
+  State<home_screen> createState() => _home_screen_State();
+}
+
+class _home_screen_State extends State<home_screen> {
+  _register(String phone) {
+    var data = {
+      'phone': phone,
+    };
+
+    var res = CallApi().postData(data, 'auth/login');
+    //var body = json.decode(res.body);
+    print(res);
+  }
+
+  final List _assets = [
+    'asset1',
+    'asset2',
+    'asset3',
+    'asset4',
+    'asset5',
+  ];
+
+  final List _groupOfAssets = [
+    'group1',
+    'group2',
+    'group3',
+    'group4',
+    'group5',
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final double deviceWidth = MediaQuery.of(context).size.width;
+    final double deviceHeight = MediaQuery.of(context).size.height;
+
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: Column(
+            children: [
+              SizedBox(height: 20),
+              // Horizontal scroll
+              Container(
+                height: 100,
+                child: ListView.builder(
+                    itemCount: _groupOfAssets.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return AssetGroups(assetGroup: _groupOfAssets[index]);
+                    }),
+              ),
+              SizedBox(height: 20),
+
+              // Buttons block
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                      onPressed: () {
+                        print('get data pressed');
+                        final String a = _register('79126027662').toString();
+                        print('the responcse is:');
+                        print(a);
+                      },
+                      child: Text('get data')),
+                  ElevatedButton(
+                      onPressed: () {
+                        print('show data pressed');
+                      },
+                      child: Text('show data')),
+                  ElevatedButton(
+                      onPressed: () {
+                        print('totdo pressed');
+                      },
+                      child: Text('todo')),
+                ],
+              ),
+
+              // Vertical scroll
+              Expanded(
+                child: ListView.builder(
+                    itemCount: _assets.length,
+                    itemBuilder: (context, index) {
+                      return AllAssets(
+                        asset: _assets[index],
+                      );
+                    }),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
